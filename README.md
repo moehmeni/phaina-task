@@ -4,7 +4,7 @@ A curated newsletter about AI agents
 ### Resources
 At the first step of this task, I'm going to note all the useful and actively maintained
 AI agent libraries.
-After a deep research options of Grok and also searching myself, I found these providers:
+Using a deep research option of Grok chat bot and also searching myself, I found these providers:
 
 n8n:\
 Many developers publish their n8n workflows which is a form of node based agent building
