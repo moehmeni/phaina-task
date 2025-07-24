@@ -5,7 +5,7 @@ async def gemini_with_search(
     prompt: str,
     model: str = "gemini-2.5-flash",
     max_tokens: int = 1000,
-    temperature: float = 0.2,
+    temperature: float = 1,
     token = None
 ):
     client = genai.Client(api_key=token)
