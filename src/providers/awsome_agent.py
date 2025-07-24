@@ -63,8 +63,11 @@ class AwsomeAgentLib(AgentLib):
         self.url = "https://github.com/e2b-dev/awesome-ai-agents"
 
     async def fetch_new_agents(self):
-        with open("README2.md", "r") as f:
-            content = f.read()
+        raw_url = "https://raw.githubusercontent.com/e2b-dev/awesome-ai-agents/main/README.md"
+        response = await self.session.get(raw_url)
+        if not response.ok:
+            raise Exception(f"Failed to fetch README: {response.status}")
+        content = await response.text()
         agents = parse_readme(content)
         return {
             "recent": agents, # assuming all agents are recent
