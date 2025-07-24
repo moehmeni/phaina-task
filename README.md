@@ -22,6 +22,7 @@ Popular GitHub repo
 
 For each of them, I developed a seperate web crawler built with modular design for easy maitainability.
 You can see their implementation in the `src/providers` directory of this repo.
+The main challenge of the project probably lied here since each website has its own structure and way of presenting the data, I had to write a custom parser for each one of them.
 
 #### News
 For fetching the latest news about AI agents I used Google Gemini 2.5 flash model with their builtin search tool as they have explained the API tools and how it works in detail [here](https://ai.google.dev/gemini-api/docs/google-search).
