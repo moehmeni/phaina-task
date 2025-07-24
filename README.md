@@ -30,3 +30,8 @@ I tried multiple prompts to get a suitable output with least amount of work, so 
 > *Gather all the latest news in July about AI agents and new workflows, make up to 10 concise one paragraph easy-to-read friendly brief of what happened. 
 Make sure the paragraphs are not ChatGPT style and like a pro human reviewer wrote them! each paragraph starts with a summarised title about the content of that paragraph in bold and next line starts the content. DO NOT make general titles and be specific about it (numbers, company names, anything clickbait)
 please include the use and ability of each agent exactly if mentioned.*
+
+
+### Database
+For storing the data I used Supabase as it is a good open source alternative to Firebase and has a free tier. It is easy to use and yet very scalable which is powered by `PostgreSQL`.
+Based on the period of the newsletter, every month or week I will fetch the data from the providers and store them in the database so that I can detect new agents added.
