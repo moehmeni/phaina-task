@@ -59,7 +59,7 @@ def parse_readme(text: str) -> List[Agent]:
 
 class AwsomeAgentLib(AgentLib):
     def __init__(self):
-        super().__init__("awsome_ai_agents")
+        super().__init__("Awesome AI Agents")
         self.url = "https://github.com/e2b-dev/awesome-ai-agents"
 
     async def fetch_new_agents(self):
@@ -71,4 +71,5 @@ class AwsomeAgentLib(AgentLib):
         agents = parse_readme(content)
         return {
             "recent": agents, # assuming all agents are recent
+            "trending": [],
         }
