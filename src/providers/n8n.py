@@ -44,9 +44,7 @@ class N8nAgentLib(AgentLib):
         trending_agents = await self._fetch_from_api(
             {"sort": "trendingScore:desc", "category": "AI", "rows": 8}
         )
-        new_agents = await self._fetch_from_api(
-            {"sort": "createdAt:desc", "rows": 8}
-        )
+        new_agents = await self._fetch_from_api({"sort": "createdAt:desc", "rows": 8})
         return {
             "trending": trending_agents,
             "recent": new_agents,
