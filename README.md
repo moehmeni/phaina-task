@@ -9,11 +9,7 @@ I came up with three main parts to show:
 4. Startups and acquisitions in the AI agent space (mixed with [1])
 
 ### Quick Access
-- [Agents](#agents)
-- [News](#news)
-- [Title](#title)
-- [Papers](#papers)
-- [Database](#database)
+[Agents](#agents) - [News](#news) - [Title](#title) - [Papers](#papers) - [Database](#database)
 
 ### Sections
 #### Agents
