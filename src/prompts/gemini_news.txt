@@ -1,3 +1,7 @@
-Gather all the latest news in July about AI agents and new workflows, make up to 10 concise one paragraph easy-to-read friendly brief of what happened. 
-make sure the paragraphs are not ChatGPT style and like a pro human reviewer wrote them! each paragraph starts with a summarised title about the content of that paragraph in bold and next line starts the content. DO NOT make general titles and be specific about it (numbers, company names, anything clickbait)
-please include the use and ability of each agent exactly if mentioned.
+Gather all the latest news in the last week about AI agents and tools and new workflows, make up to 10 concise one paragraph easy-to-read friendly brief of what happened.
+Keep in mind they should be informative yet very short, so each paragraph should be maximum 2 or 3 lines and move to next cluster to cover all agent news specifically new ones and startups.
+make sure the paragraphs are not ChatGPT style and like an experienced journalist wrote them!
+please include the usecases and ability of each agent exactly if mentioned.
+underline great numbers, or achievements, or any other important information with html tag <u>that part</u>.
+The company names or products should be **bolded** in the paragraph once mentioned for **first time** not anymore.
+The order of news should be priority based on the date of that news or if it is a big company news.
