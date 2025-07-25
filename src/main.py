@@ -1,4 +1,4 @@
-from llms import gemini_with_search
+from llms import gemini_with_search, gemini
 from providers import AwsomeAgentLib, N8nAgentLib, AiAgentsLiveLib, AiAgentsListLib
 import asyncio
 from supabase import acreate_client, AsyncClient
@@ -85,6 +85,7 @@ async def main():
     print(f"Found {len(existing_urls)} existing agents in database")
 
     html = ""
+
     async def run_with_lib(lib):
         async with lib:
             return await lib.fetch_new_agents()
@@ -129,7 +130,7 @@ async def main():
             for agent in display_trending:
                 html += get_agent_html(agent)
 
-            html += '\n'
+            html += "\n"
 
         if display_recent:
             if original_count > 10:
@@ -142,7 +143,7 @@ async def main():
             for agent in display_recent:
                 html += get_agent_html(agent)
 
-            html += '\n'
+            html += "\n"
 
         # Add provider info to agents
         for agent in combined_new:
@@ -180,15 +181,21 @@ async def main():
 
     # if news fetched today use db
     today = datetime.datetime.now().date()
-    news_response = await supabase.table("news").select("*").order("created_at", desc=True).limit(1).execute()
+    news_response = (
+        await supabase.table("news")
+        .select("*")
+        .order("created_at", desc=True)
+        .limit(1)
+        .execute()
+    )
     formatted_news = ""
     if news_response.data:
         d = news_response.data[0]["created_at"]
         news_date = datetime.datetime.fromisoformat(d).date()
         if news_date == today:
             print("Using existing news summary from database")
-            last_news = news_response.data[0]["text"]
-            formatted_news = format_news_summary(last_news)
+            news_summary = news_response.data[0]["text"]
+            formatted_news = format_news_summary(news_summary)
     if not formatted_news:
         with open("src/prompts/gemini_news.txt", "r", encoding="utf-8") as f:
             prompt = f.read().strip()
@@ -198,9 +205,25 @@ async def main():
         )
         formatted_news = format_news_summary(news_summary)
         print("Generated news summary with Gemini")
-        await supabase.table("news").insert(
-            {"text": news_summary}
-        ).execute()
+        await supabase.table("news").insert({"text": news_summary}).execute()
+
+    # query title
+    with open("last_title.txt", "r", encoding="utf-8") as f:
+        title = f.read().strip()
+    if title:
+        print(f"Using existing title from database: {title}")
+    else:
+        print("No title found in database, generating a new one")
+        with open("src/prompts/make_title.txt", "r", encoding="utf-8") as f:
+            prompt = f.read().strip()
+            prompt = prompt.replace("{{news}}", news_summary)
+
+        print("Generating title for the digest...")
+        title = (await gemini(prompt=prompt, max_tokens=None, token=gemini_key)).strip()
+        print(f"Generated title: {title}")
+        with open("last_title.txt", "w", encoding="utf-8") as f:
+            f.write(title)
+
 
     with open("agents.html", "w", encoding="utf-8") as f:
         f.write(
@@ -213,6 +236,19 @@ async def main():
         </head>
         <body style="font-family: Arial, sans-serif; background-color: #ffffff; color: #333; padding: 20px; font-size: 14px;">
         <div style="margin: auto; max-width: 700px">
+        <h1 style="
+          background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKVUrtrxWErKV6J7vvgSQ3DrBeF-zHjEucTA&s');
+          -webkit-background-clip: text;
+          background-clip: text;
+          font-size: 2rem;
+          color: transparent;
+          padding: 20px 50px;
+          font-family: Georgia, 'Times New Roman', serif;
+          text-align: center;
+        "><span style="font-size: 80px;">{title[0]}</span> {'<br>'.join(title[1:].split(";"))}</h1>
+        <p style="font-size: 16px; color: #555;text-align: center">
+        A weekly digest of the latest AI agents and products, curated for you.</p>
+        <hr style="border: none; height: 1px; background: linear-gradient(to right, transparent, #999, transparent); margin: 24px 0;" />
         <h2>📡 Agent Radar covered last week:</h2>
         <div style="padding: 0px 10px;">{formatted_news}</div>
         <hr style="border: none; height: 1px; background: linear-gradient(to right, transparent, #999, transparent); margin: 24px 0;" />
