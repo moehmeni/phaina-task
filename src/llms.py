@@ -126,6 +126,25 @@ def to_utc(d: datetime) -> datetime:
         d = d.astimezone(timezone.utc)
     return d.replace(microsecond=0)  # truncate to second precision
 
+async def gemini(
+        prompt: str,
+        model: str = "gemini-2.5-flash",
+        max_tokens: int = 1000,
+        temperature: float = 1,
+        token=None,
+) -> str:
+    client = genai.Client(api_key=token)
+    config = types.GenerateContentConfig(
+        max_output_tokens=max_tokens,
+        temperature=temperature,
+    )
+    response = await client.aio.models.generate_content(
+        model=model,
+        contents=prompt,
+        config=config,
+    )
+    return response.text
+
 async def gemini_with_search(
     prompt: str,
     model: str = "gemini-2.5-flash",
@@ -155,3 +174,28 @@ async def gemini_with_search(
     if include_citations:
         return add_citations(response)
     return response.text
+
+
+if __name__ == "__main__":
+    import asyncio
+    import os
+    import dotenv
+    dotenv.load_dotenv()
+
+    token = os.getenv("GOOGLE_API_KEY")
+    # read the prompt from src/prompts/make_title_used.txt
+    with open("src/prompts/make_title_used.txt", "r", encoding="utf-8") as f:
+        prompt = f.read().strip()
+
+    print("Using prompt:", prompt)
+    
+    async def main():
+        response = await gemini(
+            prompt=prompt,
+            model="gemini-2.5-flash",
+            max_tokens=None,
+            temperature=1,
+            token=token,
+        )
+        print("text:", response)
+    asyncio.run(main())
