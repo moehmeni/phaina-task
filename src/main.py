@@ -108,10 +108,10 @@ async def main():
             agent for agent in agents["recent"] if agent.url not in existing_urls
         ]
         combined_new = new_trending + new_recent
-        if len(combined_new) > 20:
-            combined_new = random.sample(combined_new, 20)
+        if len(combined_new) > 10:
+            combined_new = random.sample(combined_new, 10)
             print(
-                f"Limited {provider_name} to 20 random agents from {len(new_trending + new_recent)} new agents"
+                f"Limited {provider_name} to 10 random agents from {len(new_trending + new_recent)} new agents"
             )
 
         display_trending = [agent for agent in combined_new if agent in new_trending]
@@ -119,10 +119,10 @@ async def main():
         original_count = len(new_trending + new_recent)
 
         if display_trending:
-            if original_count > 20:
-                trending_title = f'More than 20 trending new agents appeared on <a href="{agents["provider_url"]}" style="color: #005f99;">{provider_name}</a> this month'
+            if original_count > 10:
+                trending_title = f'🤖 More than 10 trending new agents appeared on <a href="{agents["provider_url"]}" style="color: #005f99;">{provider_name}</a> this month'
             else:
-                trending_title = f'Trending Agents on <a href="{agents["provider_url"]}" style="color: #005f99;">{provider_name}</a>'
+                trending_title = f'🤸 Trending Agents on <a href="{agents["provider_url"]}" style="color: #005f99;">{provider_name}</a>'
             html += (
                 f'<h3 style="font-size: 16px; margin-top: 2em;">{trending_title}</h3>\n'
             )
@@ -132,10 +132,10 @@ async def main():
             html += '\n'
 
         if display_recent:
-            if original_count > 20:
-                recent_title = f'More than 20 new agents appeared on <a href="{agents["provider_url"]}" style="color: #005f99;">{provider_name}</a> this month'
+            if original_count > 10:
+                recent_title = f'🤖 More than 10 new agents appeared on <a href="{agents["provider_url"]}" style="color: #005f99;">{provider_name}</a> this month'
             else:
-                recent_title = f'Recently added Agents on <a href="{agents["provider_url"]}" style="color: #005f99;">{provider_name}</a>'
+                recent_title = f'📅 Recently added Agents on <a href="{agents["provider_url"]}" style="color: #005f99;">{provider_name}</a>'
             html += (
                 f'<h3 style="font-size: 16px; margin-top: 2em;">{recent_title}</h3>\n'
             )
@@ -181,6 +181,7 @@ async def main():
     # if news fetched today use db
     today = datetime.datetime.now().date()
     news_response = await supabase.table("news").select("*").order("created_at", desc=True).limit(1).execute()
+    formatted_news = ""
     if news_response.data:
         d = news_response.data[0]["created_at"]
         news_date = datetime.datetime.fromisoformat(d).date()
@@ -188,7 +189,7 @@ async def main():
             print("Using existing news summary from database")
             last_news = news_response.data[0]["text"]
             formatted_news = format_news_summary(last_news)
-    else:
+    if not formatted_news:
         with open("src/prompts/gemini_news.txt", "r", encoding="utf-8") as f:
             prompt = f.read().strip()
         print("Asking Gemini to summarize the news...")
@@ -211,10 +212,12 @@ async def main():
         <title>AI Agent Digest</title>
         </head>
         <body style="font-family: Arial, sans-serif; background-color: #ffffff; color: #333; padding: 20px; font-size: 14px;">
-        <h2>📰 What happened last month in the AI Agents world?</h2>
-        {formatted_news}
-        <hr>
+        <div style="margin: auto; max-width: 700px">
+        <h2>📡 Agent Radar covered last week:</h2>
+        <div style="padding: 0px 10px;">{formatted_news}</div>
+        <hr style="border: none; height: 1px; background: linear-gradient(to right, transparent, #999, transparent); margin: 24px 0;" />
         {html}
+        </div>
         </body>
         </html>
         """
