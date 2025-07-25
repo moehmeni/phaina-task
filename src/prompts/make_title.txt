@@ -1,0 +1,21 @@
+Given the following news:
+{{news}}
+Give me **one combo-style newsletter title** that includes **three short, punchy phrases**, separated by semicolons. The title should:
+
+- Highlight the **three biggest or most interesting AI news stories** from the text I provide,
+- Include **company names**, **funding amounts** (e.g. "$100M Series B"), or **specific product/feature names** when relevant,
+- Be **clever, specific, and intriguing** — like a professional journalist/editor wrote it,
+- Avoid vague or generic phrases like "AI is changing everything",
+- Be **no longer than ~15 words total**,
+- Use **no emojis**, no fluff, and **return only the title**.
+
+### Example formats:
+
+*Money-focused:*
+$200M Raised Overnight; Figma 2.0 Drops; OpenAI Goes Local
+
+*With contrast or surprise:*
+Open Source Wins Big; Apple Joins the Race; DeepMind Shrinks
+
+*With clear funding callout:*
+From $0 to $100M; Agents Just Got Their iPhone Moment; Figma Rises
