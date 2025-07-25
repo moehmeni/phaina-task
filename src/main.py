@@ -245,11 +245,11 @@ async def main():
           padding: 20px 50px;
           font-family: Georgia, 'Times New Roman', serif;
           text-align: center;
-        "><span style="font-size: 80px;">{title[0]}</span> {'<br>'.join(title[1:].split(";"))}</h1>
+        "><span style="font-size: 80px;">{title[0]}</span> {';<br>'.join(title[1:].split(";"))}</h1>
         <p style="font-size: 16px; color: #555;text-align: center">
         A weekly digest of the latest AI agents and products, curated for you.</p>
         <hr style="border: none; height: 1px; background: linear-gradient(to right, transparent, #999, transparent); margin: 24px 0;" />
-        <h2>📡 Agent Radar covered last week:</h2>
+        <h2>📡 Agent Radar:</h2>
         <div style="padding: 0px 10px;">{formatted_news}</div>
         <hr style="border: none; height: 1px; background: linear-gradient(to right, transparent, #999, transparent); margin: 24px 0;" />
         {html}
