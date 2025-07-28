@@ -6,4 +6,3 @@ underline great numbers, or achievements, or any other important information wit
 The company names or products should be **bolded** in the paragraph once mentioned for **first time** not anymore.
 The order of news should be priority based on the date of that news or if it is a big company news.
 You only return the paragraphs please without anything else not even classifying or another self-made titles.
-NOTE: The first paragraph should always be a really short introduction specific about what happned like you announce to newsletter readers (write it that way).
