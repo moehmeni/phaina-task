@@ -3,3 +3,5 @@ aiohttp
 google-genai[aiohttp]
 supabase
 dotenv
+Jinja2
+spacy
