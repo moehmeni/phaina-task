@@ -39,7 +39,8 @@ make sure the paragraphs are not ChatGPT style and like an experienced journalis
 please include the usecases and ability of each agent exactly if mentioned.
 underline great numbers, or achievements, or any other important information with html tag <u>that part</u>.
 The company names or products should be **bolded** in the paragraph once mentioned for **first time** not anymore.
-The order of news should be priority based on the date of that news or if it is a big company news.*
+The order of news should be priority based on the date of that news or if it is a big company news.
+You only return the paragraphs please without anything else not even classifying or another self-made titles.*
 
 #### Social Media
 To grab trending posts on social media, I used a custom algorithm for Reddit to find the most upvoted posts in the last week about AI agents in related subreddits such as:
