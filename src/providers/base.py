@@ -15,6 +15,19 @@ class Agent:
     description_long: Optional[str] = None
     created_at: Optional[datetime] = None
 
+@dataclass
+class Paper:
+    title: str
+    summary: str
+    url: str
+    provider_name: str
+    provider_url: str
+    ai_summary: Optional[str] = None
+    published_at: Optional[datetime] = None
+    authors: Optional[List[str]] = None
+    thumbnail_url: Optional[str] = None
+    upvote_count: int = 0
+
 
 class AgentLib:
     def __init__(self, name: str):
@@ -41,4 +54,19 @@ class AgentLib:
         Returns each agent list by section name.
         e.g. {"trending": [Agent1, Agent2], "recent": [Agent3, Agent4]}
         """
+        raise NotImplementedError("This method should be overridden by subclasses")
+    
+class PaperLib:
+    def __init__(self, name: str):
+        self.name = name
+        self.session = None
+
+    async def __aenter__(self):
+        self.session = ClientSession()
+        return self
+
+    async def __aexit__(self, exc_type, exc, tb):
+        await self.session.close()
+
+    async def fetch_new_papers(self) -> Dict[str, List[Paper]]:
         raise NotImplementedError("This method should be overridden by subclasses")
