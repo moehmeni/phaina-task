@@ -1,0 +1,163 @@
+<!-- Main Container hover: background-color: #f7f9fa; -->
+<div
+    style="margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.3125;">
+    <table cellpadding="0" cellspacing="0" border="0"
+        style="max-width: 598px; margin: 0 auto; background-color: #ffffff; border-radius: 16px; border: 1px solid #e1e8ed; overflow: hidden;">
+        <tr>
+
+            <td style="padding: 20px;">
+                <a href="{{tweet_info.url}}" style="text-decoration: none; color: inherit;">
+                    <!-- Header with Avatar and User Info -->
+                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                        <tr>
+                            <td style="width: 48px; padding-right: 12px; vertical-align: top;">
+                                <!-- Avatar -->
+                                <table cellpadding="0" cellspacing="0" border="0">
+                                    <tr>
+                                        {% if tweet_info.author_profile_shape == 'square' %}
+                                        <td
+                                            style="width: 48px; height: 48px; border-radius: 8px; overflow: hidden; position: relative;">
+                                            <img src="{{tweet_info.author_profile}}" alt="{{tweet_info.author_name}}"
+                                                style="width: 48px; height: 48px; border-radius: 8px; display: block;">
+                                        </td>
+                                        {% else %}
+                                        <td
+                                            style="width: 48px; height: 48px; border-radius: 24px; overflow: hidden; position: relative;">
+                                            <img src="{{tweet_info.author_profile}}" alt="{{tweet_info.author_name}}"
+                                                style="width: 48px; height: 48px; border-radius: 24px; display: block;">
+                                        </td>
+                                        {% endif %}
+                                    </tr>
+                                </table>
+                            </td>
+                            <td style="vertical-align: top;">
+                                <!-- User Info and X Icon -->
+                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                                    <tr>
+                                        <td>
+                                            <!-- Name and Verification -->
+                                            <table cellpadding="0" cellspacing="0" border="0">
+                                                <tr>
+                                                    <td style="padding-right: 4px;">
+                                                        <span
+                                                            style="font-weight: 700; font-size: 15px; color: #0f1419; text-decoration: none;">{{tweet_info.author_name}}</span>
+                                                    </td>
+                                                    <td style="padding-right: 4px; vertical-align: middle;">
+                                                        <!-- Verified Badge -->
+                                                        <!-- # if the author.is_blue_verified: -->
+                                                        {% if tweet_info.author_verified_type == 'Business' %}
+                                                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAAABmJLR0QA/wD/AP+gvaeTAAADQ0lEQVQ4jcWVTWhcVRiG33PuXyaZxMxMfowgTWVCqlnYhQpRELWutYIVYikurFjosopgF3ZhXVUKIrSLomiDC2mpKxeCRqlYChpMS6llQgjFOmYyM5lMcn/POd/nInbqzFxhNuK7OZfvnvPwnfe99xzg/1Z5sThaXiyO9jpf9jJp7frucYu8y1JZV27/+OADvawRacVGafplUvQQGbNMMSpM3nk3Mz1JRiGq31zVcXSIEz2mNYqc6JWpufqFToadBjZKHnGcJ/YRGjB2E1IMg40B6wR25v5J1rXLyDAsNgjWN74F0BsYZmAvLAvgAUhpg3QEMjFYR2AdQ7o2SMeAiSGIH01DdHm8trhrlpVTIOWDVACjfBgVgJKd0fxdJ+WDyQDAyLXTmdlOTsvj6s+TewysDyw5vl9ao4JJgXQMNhFIxyAdgc3OaBIVg5ikKzNsGGEl4qgSfqUjfvexE8lvbVZoIz52+x7ZB8g2SBvcRIA2WjTNU01JlSHhrAhH2v0TGeHl3JfqS7UhAM+3WcFhclL5ZexY4MMk/r1n5YN0CDZE4Sa9uOtg9Zc+xinhyFZjcT0CQbzf5fHEM3cWkq21qybe3vE22eZ4c+OcibeJjQIzONlUr00fXP96eb5wxst5r7SaIkb4Z3j18RP6+9TwTEKtwNRWc2Hyhd/fUM34AGsyUT1+e+rV2nzp/PB7bs490hkWEaeHt3px5FnZl/1OejbYRGBjkPjqw+KB6ls3zg3lZw436zc/y73ZP+KdFbL7vwrLPsL14Lm97+iFto614uOQfO8zEoA74BwrfZE/NXO4Wb/16fD+TN49kwYFALfQB2fIOd5lhVbiaFjevJQ0Eua72xKAN+wduzWfv+gV3AvS7qayIUTVkKNKcMnK2ke7rLira6czs+597k/9E/2pnXUqqgYwCT358OtbV/5ZT93XjY+y64NTgyO9gONGuD411xjrrKcem/GWXtKBRlyLEdzxQQm13pEmJBsRTKjBhiAduZTG+JfTTZ2t/Vr7RrJYZjaVcM3/PDdT2A0pEFaCVSlwiCSPOUIU7UF7JY2RHnGHrp/EuMxnfrA8y0aGnt4zF/zRy7qeVPokO1r6Mtvz1fSf6S/vsedfkMt19QAAAABJRU5ErkJggg=="
+                                                            style="width: 20px; height: 20px; vertical-align: middle;">
+
+                                                        {% elif tweet_info.author_blue_verified %}
+                                                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAMAAAC6V+0/AAAAllBMVEUAAAAA//8AgP8ameYgn+8anvYaou4hpe8eoPMbofIdoPMcovMcn/Edo/IcovIdovMdoPMdovMdoPIcofIeofIdofIcovMdovIeofIcofIdovIdofIdoPMcofEeofEdovIdofIcofIeofIdofIdofIdofIdofIcofIdofIdofIdofIdofIdofIdofIdofIdofIdofL///8zifzzAAAAMHRSTlMAAQIKEB0eHys5Pj9IUGNoaWt0dXeNkaG+xcrLzc7P0tTX2Nze4+Tp6uzt8/T3/P6dWOnoAAAAAWJLR0Qx2dsdcgAAAKVJREFUGNN90ckOgkAQRdFqEVRQgcYBBxxwoBXU+/9f54LGdFxQy5NU6uWVSN8EWRb8W9RAEzmgkkNZAZjykCiLMc7EFgsXC4tlBw+gbC2srN1HGZhIRMSvrT3Hag3UvohogNWWZiJLALTFmzfcTGXBD/0ayL2BzD/QrbeHcm/2BsCETqTdq12+2Jx7N/zJYuJi2hUSF2cDYK7HVPVV15asddD7hS8CbCIKeFstCwAAAABJRU5ErkJggg=="
+                                                            alt="Verified Badge"
+                                                            style="width: 20px; height: 20px; vertical-align: middle;">
+                                                        {% endif %}
+
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <!-- Username -->
+                                            <div style="font-size: 15px; color: #536471; margin-top: 2px;">
+                                                @{{tweet_info.username}}
+                                            </div>
+                                        </td>
+                                        <td style="text-align: right; vertical-align: top;">
+                                            <!-- X Logo -->
+                                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAMAAADXqc3KAAABPlBMVEUAAAAAAACAgIBVVVVAgIBmZmZJbW1gYIBNZmZdXXROYnZbW21RXmtZZnNOZG9SZnBVaHFSZG1PYXJSY3NVZHRTYnFQZnVRZXJTZnNRZHBVYXNTZXFVZHNSZW9VY3FUZHFSY29RZHBUY3JRZHNTY3FUZHFTY3BUY3JTZXFSZHJUZXFUZXBSY3BTY3FTZXJTZXFTZHFSY3BUZHFTZHJTY3FSZHBSZHFTZHFTY3FUZHFUZHBTZHJSY3FTZHFSZHJTZXFTZXFUY3BTZHFUZXFTZHFUZHFTZXFTZHFTZHFTZHFSY3BTZHFTY3FSZHFTZHJTZHFTZHFTZHFTZHBTZHFTZXFTZHFTZHFTZHFTZHFTZHFTZHFTZHFTZHFSZHFTZHFTZHFTZHFTZHFTZHFTZHFTZHFTZHFTZHFTZHFTZHH///+BZO4cAAAAaHRSTlMAAQIDBAUHCAoLDQ4TFBcZGxwdHyEiIyYoKSorMzU2PT5CQ0VNT1BVVldYW11fZW91dnp7fn+Fh4iMj5SVmZuiqrGztLW3ubu/wsPEyMnKzM3O09TV1tnb3uDi5urr7e7v8vP0+Pn8/g+zxD8AAAABYktHRGm8a8S0AAABCklEQVQYGZ3B9yMCYQAG4BefhqiMUzIjIzMzlKTkZJ2tSEPje///v8DdNVR+4nnwD8uqaQENroR64YNOpGnIuWGy3ZAhmIZzDCunvBLQiXMyigZ/rTJlf+YhdBEyKdC0z+ygpySXgB1Ss6OlN8VEzyoLY0HJjBNtht65jRhfKsx70WGmWpu3PpBVP7ps8cPpKTGMX+K8FCssKujmeOMBItQs6OIrUC5aNEbRyZWlZH5UKTKIdrZbMhTjnSUgvybwo++MPIH1nhEc89GGliiZFMB4kev914yhaZfU7NAFZNk38skN1K1JZpwwHfFpeo/lSRjmKsx7USfSNLwOAHDEVXUWTe6UatjE330DPPc9yMZNSMoAAAAASUVORK5CYII="
+                                                alt="X Logo" style="width: 24px; height: 24px;">
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <!-- Tweet Text -->
+                    <table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin-top: 12px;">
+                        <tr>
+                            <td
+                                style="font-size: 20px; line-height: 24px; color: #0f1419; font-weight: 400; white-space: pre-wrap;">{{ tweet_info.tweet_text }}</td>
+                        </tr>
+                    </table>
+
+                    <!-- Media Section -->
+                    {% if tweet_info.media %}
+                    <table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin-top: 12px;">
+                        <tr>
+                            <td>
+                                {% for media in tweet_info.media[:1] %}
+                                {% if media.type == 'video' %}
+                                <!-- Video Thumbnail with Play Button -->
+                                <div
+                                    style="width:100%; border-radius: 16px; overflow: hidden; background-color: #000000;">
+                                    <img src="{{media.thumbnail_uri}}" alt="Video thumbnail"
+                                        style="width: 100%; height: auto; display: block; border-radius: 16px; object-fit: cover; object-position: center; max-height: 300px;">
+                                </div>
+                                {% else %}
+                                <!-- Image -->
+                                <img src="{{media.thumbnail_url}}" alt="Tweet image"
+                                    style="width: 100%; height: auto; display: block; border-radius: 16px; border: 1px solid #e1e8ed; object-fit: cover; object-position: center; max-height: 300px;">
+                                {% endif %}
+                                {% endfor %}
+                            </td>
+                        </tr>
+                    </table>
+                    {% endif %}
+
+                    <!-- Tweet Metadata -->
+                    <table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin-top: 16px;">
+                        <tr>
+                            <td>
+                                <table cellpadding="0" cellspacing="0" border="0">
+                                    <tr>
+                                        <td style="padding-right: 12px;">
+                                            <span
+                                                style="color: #536471; font-size: 15px;">{{tweet_info.created_at.strftime("%-I:%M
+                                                %p • %b %d, %Y")}}</span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <!-- Action Buttons -->
+                    <table cellpadding="0" cellspacing="0" border="0" width="100%"
+                        style="margin-top: 12px; border-top: 1px solid #e1e8ed; padding-top: 12px;">
+                        <tr>
+                            <td style="width: 33%; text-align: left;">
+                                <!-- Like Button -->
+                                <table cellpadding="0" cellspacing="0" border="0">
+                                    <tr>
+                                        <td>
+                                            <span style="font-size: 14px;"><b>{{tweet_info.likes | human_count}}</b>
+                                                <span style="color: #536471;">Likes</span></span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <!-- Read Replies Button -->
+                    <table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin-top: 12px;">
+                        <tr>
+                            <td style="text-align: center;">
+                                <div
+                                    style="max-width: 100%; background-color: transparent; border: 1px solid #cfd9de; border-radius: 20px; padding: 8px 16px;">
+                                    <a href="{{tweet_info.url}}"
+                                        style="color: #1d9bf0; font-size: 15px; font-weight: 700; text-decoration: none;">Read
+                                        {{tweet_info.replies}} replies</span>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+
+                </a>
+            </td>
+
+        </tr>
+    </table>
+</div>
